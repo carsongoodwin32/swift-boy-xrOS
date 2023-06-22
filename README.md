@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/bberak/swift-boy/master/assets/icon-rounded.png" alt="Swift Boy" height="120" />
 </p>
 
-# Swift Boy
+# SwiftBoy XR
 
 A Game Boy emulator for xrOS 📱
 A Quick and (very) Dirty xrOS port based on https://github.com/bberak/swift-boy
