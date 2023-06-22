@@ -55,7 +55,6 @@ struct PressableView<C: View> : View {
     @State private var pressed = false {
         didSet {
             pressedBinding = pressed
-            haptics.impactOccurred(intensity: 0.5);
             if let cb = pressed ? onPressedCallback : onReleasedCallback {
                 cb()
             }
@@ -63,7 +62,7 @@ struct PressableView<C: View> : View {
     }
     
     private let getChildView: (Bool) -> C
-    private var haptics: UIImpactFeedbackGenerator  = UIImpactFeedbackGenerator(style: .medium)
+
     private var onPressedCallback: (() -> Void)?
     private var onReleasedCallback: (() -> Void)?
     
@@ -98,12 +97,6 @@ extension PressableView {
         self.getChildView = getChildView
     }
     
-    func impact(_ strength: UIImpactFeedbackGenerator.FeedbackStyle) -> Self {
-        var next = self;
-        next.haptics = UIImpactFeedbackGenerator(style: strength);
-        
-        return next;
-    }
     
     func onPressed(_ onPressedCallback: @escaping () -> Void) -> Self {
         var next = self

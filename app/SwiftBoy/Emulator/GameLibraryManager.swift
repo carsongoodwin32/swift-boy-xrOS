@@ -44,13 +44,12 @@ class GameLibraryManager: ObservableObject {
         
         self.inserted = next
         
-        self.clock.sync { mmu, cpu, ppu, apu, timer in
+        self.clock.sync { mmu, cpu, ppu, timer in
             previous.saveRam()
             mmu.insertCartridge(next)
             mmu.reset()
             cpu.reset()
             ppu.reset()
-            apu.reset()
             timer.reset()
         }
     }

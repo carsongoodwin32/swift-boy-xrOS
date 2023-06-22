@@ -6,24 +6,23 @@ public class Clock {
     private let mmu: MMU
     private let ppu: PPU
     private let cpu: CPU
-    private let apu: APU
     private let timer: Timer
     private let fps: Double
     private let frameTime: Double
-    private var syncTasks: [(MMU, CPU, PPU, APU, Timer) -> Void] = []
+    private var syncTasks: [(MMU, CPU, PPU, Timer) -> Void] = []
     public var printFrameDuration = false
    
-    public init(_ mmu: MMU, _ ppu: PPU, _ cpu: CPU, _ apu: APU, _ timer: Timer) {
+    public init(_ mmu: MMU, _ ppu: PPU, _ cpu: CPU, _ timer: Timer) {
         self.mmu = mmu
         self.ppu = ppu
         self.cpu = cpu
-        self.apu = apu
+
         self.timer = timer
         self.fps = 60
         self.frameTime = 1 / fps
     }
     
-    public func sync(task: @escaping (MMU, CPU, PPU, APU, Timer) -> Void) {
+    public func sync(task: @escaping (MMU, CPU, PPU, Timer) -> Void) {
         self.syncTasks.append(task)
     }
 
@@ -31,8 +30,8 @@ public class Clock {
         var next = current + frameTime
 
         DispatchQueue.global(qos: .userInteractive).async {
-            if self.syncTasks.isNotEmpty {
-                self.syncTasks.forEach { $0(self.mmu, self.cpu, self.ppu, self.apu, self.timer) }
+            if !self.syncTasks.isEmpty {
+                self.syncTasks.forEach { $0(self.mmu, self.cpu, self.ppu, self.timer) }
                 self.syncTasks.removeAll()
             }
             
@@ -72,10 +71,6 @@ public class Clock {
             StopWatch.global.start("ppu")
             try ppu.run(ppuCycles: cycles / 2) // 2 MHz
             StopWatch.global.stop("ppu")
-            
-            StopWatch.global.start("apu")
-            try apu.run(seconds: seconds)
-            StopWatch.global.stop("apu")
             
             StopWatch.global.start("timer")
             try timer.run(timerCycles: cycles / 16) // 250 KHz

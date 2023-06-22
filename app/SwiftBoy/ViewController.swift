@@ -10,10 +10,9 @@ class ViewController: UIViewController {
         let mmu = MMU()
         let ppu = PPU(mmu)
         let cpu = CPU(mmu)
-        let apu = APU(mmu)
         let timer = Timer(mmu)
         let joypad = Joypad(mmu)
-        let clock = Clock(mmu, ppu, cpu, apu, timer)
+        let clock = Clock(mmu, ppu, cpu, timer)
         let glm = GameLibraryManager(clock)
         
         clock.start()
