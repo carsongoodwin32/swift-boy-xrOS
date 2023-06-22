@@ -4,24 +4,20 @@
 
 # Swift Boy
 
-A Game Boy emulator for iOS 📱
+A Game Boy emulator for xrOS 📱
+A Quick and (very) Dirty xrOS port based on https://github.com/bberak/swift-boy
 
 ## Getting Started
 
-1. Clone the repo: `git clone https://github.com/bberak/swift-boy.git`
+1. Clone the repo: `git clone https://github.com/carsongoodwin32/swift-boy-xrOS`
 2. Open `app/SwiftBoy.xcodeproc` with XCode
 3. Select `Swift Boy Release` scheme and target device
 4. Build, run and enjoy some nostalgic gaming 🎉
 
 ## Importing Games
 
-You can import your own legally-obtained Game Boy ROMs (.gb files) by clicking the title above the *LCD* screen and clicking the big **IMPORT GAME** button at the bottom of the modal 👍.
+You can import your own legally-obtained Game Boy ROMs (.gb files) by clicking the title above the *LCD* screen and clicking the big **IMPORT GAME** button at the bottom of the modal 👍. On xrOS you may need to expand the window to see the title above the LCD screen.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/bberak/swift-boy/master/assets/import-menu-portrait.gif" width="249" height="540" />
-  <img src="https://raw.githubusercontent.com/bberak/swift-boy/master/assets/tetris-gameplay-portrait.gif" width="249" height="540" />
-  <img src="https://raw.githubusercontent.com/bberak/swift-boy/master/assets/super-marioland-gameplay-portrait.gif" width="249"  height="540" />
-</p>
 
 ## Links and Resources
 
@@ -33,12 +29,16 @@ You can import your own legally-obtained Game Boy ROMs (.gb files) by clicking t
 
 ## TODOs
 
+- Reintroduce Audio via AudioKit Port (Currently Unsupported on VisionOS)
+- Make Controls better
+- Add xrOS Filesystem stuff to load games
+- Remove storyboard stuff
 - Better MBC support (currently only partially supports MBC0 and MBC1)
 - The sound synthesizer is not quite right yet
 - Handle transparent pixels and sprite priority
 - A bunch of other stuff
 
-## License
+## Original License from Parent Project
 
 MIT License
 
